@@ -183,7 +183,20 @@ class AreaDetectorHDF5Handler(HDF5DatasetSliceHandler):
         )
 
 class ADURLHDF5Handler(AreaDetectorHDF5Handler):
-    
+    """
+    Modification of the Area Detector handler HDF5 for RGB data.
+
+    In this spec, the key (i.e., HDF5 dataset path) is always
+    '/entry/data/data'.
+
+    Parameters
+    ----------
+    filename : string
+        path to HDF5 file
+    frame_per_point : integer, optional
+        number of frames to return as one datum, default 1
+    """
+
     def __init__(self, filename, frame_per_point=1):
         hardcoded_key = "/entry/data/data"
         super().__init__(
