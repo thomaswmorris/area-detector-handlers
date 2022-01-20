@@ -182,6 +182,17 @@ class AreaDetectorHDF5Handler(HDF5DatasetSliceHandler):
             filename=filename, key=hardcoded_key, frame_per_point=frame_per_point
         )
 
+class ADURLHDF5Handler(AreaDetectorHDF5Handler):
+    
+    def __init__(self, filename, frame_per_point=1):
+        hardcoded_key = "/entry/data/data"
+        super().__init__(
+            filename=filename, frame_per_point=frame_per_point
+        )
+
+        self(0)
+        nframes, nx, ny, _ = self._dataset.shape
+        self._dataset.reshape((nframes, 3, nx, ny))
 
 class AreaDetectorHDF5SWMRHandler(AreaDetectorHDF5Handler):
     """
